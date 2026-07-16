@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>💰 Tax Calculator</h1>
+
+    <div class="card">
+
+        <label>Annual Income ($)</label>
+        <input type="number" id="income" placeholder="50000">
+
+        <label>Tax Rate (%)</label>
+        <input type="number" id="taxRate" placeholder="20">
+
+        <button onclick="calculateTax()">
+            Calculate
+        </button>
+
+        <div class="results">
+
+            <div class="result-box">
+                <span>Annual Tax</span>
+                <h2 id="annualTax">$0</h2>
+            </div>
+
+            <div class="result-box">
+                <span>Monthly Tax</span>
+                <h2 id="monthlyTax">$0</h2>
+            </div>
+
+            <div class="result-box">
+                <span>Net Annual Income</span>
+                <h2 id="netAnnual">$0</h2>
+            </div>
+
+            <div class="result-box">
+                <span>Net Monthly Income</span>
+                <h2 id="netMonthly">$0</h2>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
