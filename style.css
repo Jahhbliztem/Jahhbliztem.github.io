@@ -25,6 +25,11 @@ button,a{font:inherit;}
 .brand{font-size:1.35rem;font-weight:bold;color:white;text-decoration:none;}
 .nav-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
 .nav-link{color:white;text-decoration:none;opacity:0.95;}
+.profile-chip{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.16);backdrop-filter:blur(4px);}
+.profile-avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:white;color:var(--green);font-weight:700;}
+.profile-meta{display:flex;flex-direction:column;line-height:1.1;}
+.profile-meta strong{font-size:0.95rem;}
+.profile-meta span{font-size:0.75rem;opacity:0.85;}
 .btn{display:inline-block;padding:10px 16px;border-radius:999px;border:none;text-decoration:none;font-weight:600;transition:0.3s ease;cursor:pointer;}
 .btn:hover{transform:translateY(-2px);} 
 .btn-dark{background:#0f2d16;color:white;}

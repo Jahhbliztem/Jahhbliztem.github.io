@@ -160,6 +160,9 @@ function updateAuthState(user){
     const accountTitle = document.getElementById("accountTitle");
     const accountText = document.getElementById("accountText");
     const accountBadge = document.getElementById("accountBadge");
+    const profileChip = document.getElementById("profileChip");
+    const profileName = document.getElementById("profileName");
+    const profileAvatar = document.getElementById("profileAvatar");
 
     const showAuthButtons = !user;
 
@@ -170,6 +173,10 @@ function updateAuthState(user){
     if (heroLogin) heroLogin.classList.toggle("hidden", !showAuthButtons);
     if (ctaSignup) ctaSignup.classList.toggle("hidden", !showAuthButtons);
     if (ctaLogin) ctaLogin.classList.toggle("hidden", !showAuthButtons);
+
+    if (profileChip) profileChip.classList.toggle("hidden", !user);
+    if (profileName && user) profileName.textContent = user.name.split(" ")[0];
+    if (profileAvatar && user) profileAvatar.textContent = user.name.charAt(0).toUpperCase();
 
     if (user) {
         accountTitle.textContent = `Welcome back, ${user.name.split(" ")[0]}`;
