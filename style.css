@@ -57,6 +57,14 @@ button,a{font:inherit;}
 .section-heading h2,.support-card h2,.cta-section h2{font-size:clamp(1.5rem, 3vw, 2.2rem);margin-bottom:8px;}
 .feature-grid,.dashboard-grid,.insight-grid,.pricing-grid,.testimonial-grid{display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:20px;}
 .feature-card,.dash-card,.insight-card,.pricing-card,.testimonial-card,.faq-card{padding:24px;}
+.chat-card{background:white;border-radius:20px;padding:24px;box-shadow:0 14px 38px rgba(0,0,0,0.12);}
+.chat-messages{display:grid;gap:10px;min-height:220px;max-height:320px;overflow:auto;padding-right:6px;margin-bottom:14px;}
+.chat-bubble{max-width:85%;padding:12px 14px;border-radius:14px;line-height:1.5;}
+.chat-bubble.bot{background:#f3fbf4;color:var(--text);}
+.chat-bubble.user{background:var(--green);color:white;margin-left:auto;}
+.chat-controls{display:flex;gap:10px;}
+.chat-controls input{flex:1;padding:12px 14px;border:1px solid #dfeee0;border-radius:999px;}
+.small{padding:8px 12px;font-size:0.9rem;margin-top:12px;}
 .feature-card h3,.dash-card h3,.insight-card h3,.pricing-card h3{margin-bottom:8px;color:var(--green);} 
 .chart-card{padding:24px;}
 .pricing-card{background:linear-gradient(180deg,#ffffff,#f7fcf8);border:1px solid #e8f4ea;}

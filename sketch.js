@@ -129,6 +129,35 @@ function showPlan(plan){
     }
 }
 
+function addChatMessage(text, isUser = false){
+    const messages = document.getElementById("chatMessages");
+    if (!messages) return;
+
+    const bubble = document.createElement("div");
+    bubble.className = `chat-bubble ${isUser ? "user" : "bot"}`;
+    bubble.textContent = text;
+    messages.appendChild(bubble);
+    messages.scrollTop = messages.scrollHeight;
+}
+
+function getAiReply(message){
+    const lower = message.toLowerCase();
+
+    if (lower.includes("deduction")) {
+        return "Common deductions can include education costs, charitable gifts, and work-related expenses. Keep receipts and review your eligibility carefully.";
+    }
+
+    if (lower.includes("deadline") || lower.includes("file")) {
+        return "Filing deadlines vary by region and status, so it helps to review your local requirements and keep a checklist ready.";
+    }
+
+    if (lower.includes("tutor") || lower.includes("help")) {
+        return "You can use our tutoring plans for guided help with filing questions, planning, and document review.";
+    }
+
+    return "I can help with basic tax questions, deductions, deadlines, and tutoring options. Ask me something more specific.";
+}
+
 function openModal(mode){
     const modal = document.getElementById("authModal");
     const loginForm = document.getElementById("loginForm");
@@ -323,6 +352,27 @@ window.addEventListener("DOMContentLoaded", () => {
                 updateActionStatus("Starter guide prepared for download.");
             }
         });
+    });
+
+    const chatInput = document.getElementById("chatInput");
+    const chatSend = document.getElementById("chatSend");
+
+    function sendChatMessage(){
+        const message = chatInput.value.trim();
+        if (!message) return;
+
+        addChatMessage(message, true);
+        chatInput.value = "";
+        addChatMessage(getAiReply(message));
+        addActionTask(`Asked the AI assistant: ${message}`);
+    }
+
+    chatSend.addEventListener("click", sendChatMessage);
+    chatInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            sendChatMessage();
+        }
     });
 
     document.querySelectorAll(".plan-tab").forEach((button) => {

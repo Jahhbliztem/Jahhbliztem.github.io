@@ -94,6 +94,22 @@
             </div>
         </section>
 
+        <section id="ai-chat" class="section">
+            <div class="section-heading">
+                <p class="eyebrow">Smart assistant</p>
+                <h2>Ask a simple tax helper anything</h2>
+            </div>
+            <div class="chat-card">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="chat-bubble bot">Hi! I can help with filing basics, deductions, and tax questions.</div>
+                </div>
+                <div class="chat-controls">
+                    <input type="text" id="chatInput" placeholder="Ask about deductions, deadlines, or tutoring...">
+                    <button class="btn btn-primary" id="chatSend">Send</button>
+                </div>
+            </div>
+        </section>
+
         <section id="features" class="section">
             <div class="section-heading">
                 <p class="eyebrow">Core features</p>
@@ -146,18 +162,22 @@
                 <article class="dash-card">
                     <h3>Smart checklist</h3>
                     <p>Stay on top of filing deadlines, pending documents, and tax reminders with a clear to-do plan.</p>
+                    <button class="btn btn-outline small action-btn" data-action="checklist">Add checklist</button>
                 </article>
                 <article class="dash-card">
                     <h3>Document vault</h3>
                     <p>Store and review personal tax documents, proof of identification, and receipts in one place.</p>
+                    <button class="btn btn-outline small action-btn" data-action="review">Start review</button>
                 </article>
                 <article class="dash-card">
                     <h3>Live support</h3>
                     <p>Reach a human support agent or an AI helper in seconds whenever you need guidance.</p>
+                    <button class="btn btn-outline small action-btn" data-action="support">Book support</button>
                 </article>
                 <article class="dash-card">
                     <h3>Live reports</h3>
                     <p>Monitor your financial summary and receive helpful updates on eligible deductions and recent changes.</p>
+                    <button class="btn btn-outline small action-btn" data-action="plan">View plans</button>
                 </article>
             </div>
         </section>
