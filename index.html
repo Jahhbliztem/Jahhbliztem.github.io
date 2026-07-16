@@ -182,6 +182,34 @@
             </div>
         </section>
 
+        <section id="tools" class="section">
+            <div class="section-heading">
+                <p class="eyebrow">More tools</p>
+                <h2>Extra ways to stay on top of your taxes</h2>
+            </div>
+            <div class="dashboard-grid">
+                <article class="dash-card">
+                    <h3>Quick tax calculator</h3>
+                    <p>Estimate a simple tax amount based on your income and filing status.</p>
+                    <div class="calc-row">
+                        <input type="number" id="incomeInput" placeholder="Income">
+                        <button class="btn btn-primary" id="calcButton">Calculate</button>
+                    </div>
+                    <p id="calcResult" class="action-status">Estimated result will appear here.</p>
+                </article>
+                <article class="dash-card">
+                    <h3>Progress tracker</h3>
+                    <p>Track how far along you are with your filing plan.</p>
+                    <div class="progress-bar"><span id="progressFill"></span></div>
+                    <div class="progress-actions">
+                        <button class="btn btn-outline small" id="progressAdd">Advance step</button>
+                        <button class="btn btn-outline small" id="progressReset">Reset</button>
+                    </div>
+                    <p id="progressText" class="action-status">Step 1 of 4</p>
+                </article>
+            </div>
+        </section>
+
         <section id="insights" class="section">
             <div class="section-heading">
                 <p class="eyebrow">Advanced insights</p>
@@ -320,6 +348,32 @@
     <footer>
         <p>© <span id="year"></span> TaxHub. Trusted help for modern tax needs.</p>
     </footer>
+
+    <div class="modal hidden" id="checkoutModal">
+        <div class="modal-card checkout-card">
+            <button class="modal-close" id="closeCheckoutModal" aria-label="Close">×</button>
+            <h3>Secure checkout</h3>
+            <p id="checkoutSummary" class="checkout-summary">You are about to pay for your selected plan.</p>
+            <form id="checkoutForm" class="auth-form active-form">
+                <label>Cardholder name</label>
+                <input type="text" id="cardName" required>
+                <label>Card number</label>
+                <input type="text" id="cardNumber" maxlength="19" placeholder="0000 0000 0000 0000" required>
+                <div class="checkout-row">
+                    <div>
+                        <label>Expiry</label>
+                        <input type="text" id="cardExpiry" placeholder="MM/YY" maxlength="5" required>
+                    </div>
+                    <div>
+                        <label>CVV</label>
+                        <input type="password" id="cardCvv" maxlength="4" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary full">Pay now</button>
+                <p class="form-message" id="checkoutMessage"></p>
+            </form>
+        </div>
+    </div>
 
     <div class="modal hidden" id="authModal">
         <div class="modal-card">

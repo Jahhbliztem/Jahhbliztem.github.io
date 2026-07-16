@@ -177,6 +177,27 @@ function closeModal(){
     document.getElementById("authModal").classList.add("hidden");
 }
 
+function openCheckoutModal(){
+    const modal = document.getElementById("checkoutModal");
+    const summary = document.getElementById("checkoutSummary");
+    const selectedPlan = localStorage.getItem(MEMBERSHIP_PLAN_KEY) || "Starter";
+
+    if (summary) {
+        summary.textContent = `You are about to pay for the ${selectedPlan} tutoring plan.`;
+    }
+
+    if (modal) {
+        modal.classList.remove("hidden");
+    }
+}
+
+function closeCheckoutModal(){
+    const modal = document.getElementById("checkoutModal");
+    if (modal) {
+        modal.classList.add("hidden");
+    }
+}
+
 function updateAuthState(user){
     const openLogin = document.getElementById("openLogin");
     const openSignup = document.getElementById("openSignup");
@@ -316,10 +337,16 @@ window.addEventListener("DOMContentLoaded", () => {
     document.getElementById("openSignup").addEventListener("click", () => openModal("signup"));
     document.getElementById("openLogin").addEventListener("click", () => openModal("login"));
     document.getElementById("closeModal").addEventListener("click", closeModal);
+    document.getElementById("closeCheckoutModal").addEventListener("click", closeCheckoutModal);
     document.getElementById("logoutButton").addEventListener("click", logoutUser);
     document.getElementById("authModal").addEventListener("click", (event) => {
         if (event.target.id === "authModal") {
             closeModal();
+        }
+    });
+    document.getElementById("checkoutModal").addEventListener("click", (event) => {
+        if (event.target.id === "checkoutModal") {
+            closeCheckoutModal();
         }
     });
 
@@ -397,5 +424,68 @@ window.addEventListener("DOMContentLoaded", () => {
 
         const selected = localStorage.getItem(MEMBERSHIP_PLAN_KEY) || "Starter";
         updateActionStatus(`${selected} membership is ready for checkout.`);
+        openCheckoutModal();
+    });
+
+    document.getElementById("checkoutForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+        const messageBox = document.getElementById("checkoutMessage");
+        const cardNumber = document.getElementById("cardNumber").value.replace(/\s/g, "");
+        const cvv = document.getElementById("cardCvv").value;
+
+        if (cardNumber.length < 12 || cvv.length < 3) {
+            if (messageBox) {
+                messageBox.textContent = "Please enter a valid card number and CVV.";
+                messageBox.style.color = "#c0392b";
+            }
+            return;
+        }
+
+        if (messageBox) {
+            messageBox.textContent = "Payment received. Your tutoring plan is now active.";
+            messageBox.style.color = "#2E7D32";
+        }
+
+        setTimeout(() => {
+            closeCheckoutModal();
+            updateActionStatus("Payment completed successfully.");
+        }, 1000);
+    });
+
+    let progressStep = 1;
+    const progressFill = document.getElementById("progressFill");
+    const progressText = document.getElementById("progressText");
+
+    function updateProgress(){
+        const percent = (progressStep / 4) * 100;
+        if (progressFill) progressFill.style.width = `${percent}%`;
+        if (progressText) progressText.textContent = `Step ${progressStep} of 4`;
+    }
+
+    document.getElementById("progressAdd").addEventListener("click", () => {
+        progressStep = Math.min(progressStep + 1, 4);
+        updateProgress();
+        addActionTask("Advanced your filing progress");
+    });
+
+    document.getElementById("progressReset").addEventListener("click", () => {
+        progressStep = 1;
+        updateProgress();
+    });
+
+    updateProgress();
+
+    document.getElementById("calcButton").addEventListener("click", () => {
+        const income = Number(document.getElementById("incomeInput").value);
+        const result = document.getElementById("calcResult");
+
+        if (!income || income <= 0) {
+            result.textContent = "Enter a valid income amount.";
+            return;
+        }
+
+        const estimate = (income * 0.18).toFixed(2);
+        result.textContent = `Estimated tax: $${estimate}`;
+        addActionTask("Calculated an estimated tax amount");
     });
 });

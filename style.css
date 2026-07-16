@@ -64,6 +64,11 @@ button,a{font:inherit;}
 .chat-bubble.user{background:var(--green);color:white;margin-left:auto;}
 .chat-controls{display:flex;gap:10px;}
 .chat-controls input{flex:1;padding:12px 14px;border:1px solid #dfeee0;border-radius:999px;}
+.calc-row{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap;}
+.calc-row input{flex:1;padding:10px 12px;border:1px solid #dfeee0;border-radius:999px;}
+.progress-bar{width:100%;height:12px;border-radius:999px;background:#edf6ee;overflow:hidden;margin:12px 0;}
+.progress-bar span{display:block;height:100%;width:25%;background:linear-gradient(90deg,var(--green),#73c97b);transition:width 0.3s ease;}
+.progress-actions{display:flex;gap:10px;flex-wrap:wrap;}
 .small{padding:8px 12px;font-size:0.9rem;margin-top:12px;}
 .feature-card h3,.dash-card h3,.insight-card h3,.pricing-card h3{margin-bottom:8px;color:var(--green);} 
 .chart-card{padding:24px;}
@@ -109,6 +114,9 @@ footer{text-align:center;padding:30px 20px 40px;color:#56725b;}
 .modal{position:fixed;inset:0;background:rgba(7,26,15,0.7);display:flex;justify-content:center;align-items:center;padding:20px;z-index:1000;}
 .modal.hidden{display:none;}
 .modal-card{position:relative;width:min(460px, 100%);padding:24px;}
+.checkout-card{padding:28px;}
+.checkout-summary{margin-bottom:12px;color:#546b57;}
+.checkout-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 .modal-close{position:absolute;top:12px;right:12px;border:none;background:transparent;font-size:1.4rem;cursor:pointer;color:#56725b;}
 .modal-tabs{display:flex;gap:8px;margin-bottom:16px;}
 .tab-btn{border:none;background:#eef7ee;color:var(--green);padding:8px 12px;border-radius:999px;cursor:pointer;}
