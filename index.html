@@ -13,6 +13,7 @@
             <a href="#" class="brand">TaxHub</a>
             <div class="nav-actions">
                 <a href="#features" class="nav-link">Features</a>
+                <a href="#rates" class="nav-link">Tax Rates</a>
                 <a href="#support" class="nav-link">Support</a>
                 <button class="btn btn-dark" id="openLogin">Log In</button>
                 <button class="btn btn-light" id="openSignup">Sign Up</button>
@@ -25,39 +26,30 @@
                 <p class="eyebrow">Secure • Smart • Simple</p>
                 <h1>Your tax journey, made clear.</h1>
                 <p class="hero-description">
-                    TaxHub is a modern tax companion that helps you view your tax information, compare tax rates around the world, talk with a 24/7 AI agent, and access human support with secure identity verification.
+                    TaxHub is a modern tax companion that helps you view your tax information, compare global tax rates, talk with a 24/7 AI agent, and access human support with secure identity verification.
                 </p>
                 <div class="hero-buttons">
                     <button class="btn btn-primary" id="heroSignup">Create Account</button>
                     <button class="btn btn-outline" id="heroLogin">Log In</button>
                 </div>
                 <div class="hero-stats">
-                    <div>
-                        <strong>24/7</strong>
-                        <span>AI support</span>
-                    </div>
-                    <div>
-                        <strong>100+</strong>
-                        <span>countries</span>
-                    </div>
-                    <div>
-                        <strong>Secure</strong>
-                        <span>verified access</span>
-                    </div>
+                    <div><strong>24/7</strong><span>AI support</span></div>
+                    <div><strong>100+</strong><span>countries</span></div>
+                    <div><strong>Secure</strong><span>identity checks</span></div>
                 </div>
             </div>
 
-            <div class="hero-card" id="accountPanel">
-                <p class="eyebrow">Your account</p>
-                <h3 id="accountTitle">Welcome to TaxHub</h3>
-                <p id="accountText">Create an account to unlock your personal tax dashboard, tax reminders, and secure support tools.</p>
-                <div id="accountBadge" class="account-badge">Guest mode</div>
-                <ul class="feature-list">
-                    <li>Live tax checklist</li>
-                    <li>AI-powered guidance</li>
-                    <li>Secure document review</li>
-                </ul>
-                <button class="btn btn-primary" id="heroAction">Create Account</button>
+            <div class="hero-card">
+                <div class="hero-card-top">
+                    <div>
+                        <p class="eyebrow">Your secure dashboard</p>
+                        <h3 id="accountTitle">Welcome to TaxHub</h3>
+                    </div>
+                    <span id="accountBadge" class="account-badge">Guest mode</span>
+                </div>
+                <p id="accountText">Create an account to unlock your personal tax dashboard, reminders, AI guidance, and secure document access.</p>
+                <img src="assets/tax-dashboard.svg" alt="TaxHub dashboard preview" class="hero-image">
+                <button class="btn btn-primary full" id="heroAction">Create Account</button>
             </div>
         </div>
     </header>
@@ -76,7 +68,7 @@
                 </article>
                 <article class="feature-card">
                     <h3>Global Rate Insights</h3>
-                    <p>Explore tax rates around the world to compare regulations and make smarter financial choices.</p>
+                    <p>Explore tax rates around the world and compare regulations with visual charts.</p>
                 </article>
                 <article class="feature-card">
                     <h3>24/7 AI Assistance</h3>
@@ -86,6 +78,22 @@
                     <h3>Secure Identity Verification</h3>
                     <p>Access your account securely and verify personal details with valid proof of identification.</p>
                 </article>
+            </div>
+        </section>
+
+        <section id="rates" class="section">
+            <div class="section-heading">
+                <p class="eyebrow">Global tax view</p>
+                <h2>See how tax rates compare across major regions</h2>
+            </div>
+            <div class="chart-card">
+                <div class="chart-bars">
+                    <div class="bar-group"><span>US</span><div class="bar us"></div><strong>25%</strong></div>
+                    <div class="bar-group"><span>UK</span><div class="bar uk"></div><strong>20%</strong></div>
+                    <div class="bar-group"><span>Germany</span><div class="bar de"></div><strong>27%</strong></div>
+                    <div class="bar-group"><span>India</span><div class="bar in"></div><strong>22%</strong></div>
+                    <div class="bar-group"><span>UAE</span><div class="bar ae"></div><strong>9%</strong></div>
+                </div>
             </div>
         </section>
 
@@ -102,7 +110,7 @@
                 </article>
                 <article class="dash-card">
                     <h3>Document vault</h3>
-                    <p>Store and review personal tax documents, proof of identification, and important receipts in one place.</p>
+                    <p>Store and review personal tax documents, proof of identification, and receipts in one place.</p>
                 </article>
                 <article class="dash-card">
                     <h3>Live support</h3>
