@@ -14,8 +14,9 @@
             <div class="nav-actions">
                 <a href="#features" class="nav-link">Features</a>
                 <a href="#support" class="nav-link">Support</a>
-                <a href="#signup" class="btn btn-dark">Log In</a>
-                <a href="#signup" class="btn btn-light">Sign Up</a>
+                <button class="btn btn-dark" id="openLogin">Log In</button>
+                <button class="btn btn-light" id="openSignup">Sign Up</button>
+                <button class="btn btn-outline hidden" id="logoutButton">Log Out</button>
             </div>
         </nav>
 
@@ -24,24 +25,39 @@
                 <p class="eyebrow">Secure • Smart • Simple</p>
                 <h1>Your tax journey, made clear.</h1>
                 <p class="hero-description">
-                    TaxHub is a modern tax companion that helps you view your tax information, understand tax rates around the world, connect with a 24/7 AI agent, and get human support when you need it.
+                    TaxHub is a modern tax companion that helps you view your tax information, compare tax rates around the world, talk with a 24/7 AI agent, and access human support with secure identity verification.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#signup" class="btn btn-primary">Start Free</a>
-                    <a href="#features" class="btn btn-outline">Explore Features</a>
+                    <button class="btn btn-primary" id="heroSignup">Create Account</button>
+                    <button class="btn btn-outline" id="heroLogin">Log In</button>
+                </div>
+                <div class="hero-stats">
+                    <div>
+                        <strong>24/7</strong>
+                        <span>AI support</span>
+                    </div>
+                    <div>
+                        <strong>100+</strong>
+                        <span>countries</span>
+                    </div>
+                    <div>
+                        <strong>Secure</strong>
+                        <span>verified access</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="hero-card">
-                <h3>Quick tax estimate</h3>
-                <label for="income">Annual income ($)</label>
-                <input type="number" id="income" placeholder="50000">
-
-                <label for="taxRate">Estimated tax rate (%)</label>
-                <input type="number" id="taxRate" placeholder="20">
-
-                <button type="button" id="estimateButton">Estimate</button>
-                <p id="estimateResult" class="estimate-result">Your estimated tax will appear here.</p>
+            <div class="hero-card" id="accountPanel">
+                <p class="eyebrow">Your account</p>
+                <h3 id="accountTitle">Welcome to TaxHub</h3>
+                <p id="accountText">Create an account to unlock your personal tax dashboard, tax reminders, and secure support tools.</p>
+                <div id="accountBadge" class="account-badge">Guest mode</div>
+                <ul class="feature-list">
+                    <li>Live tax checklist</li>
+                    <li>AI-powered guidance</li>
+                    <li>Secure document review</li>
+                </ul>
+                <button class="btn btn-primary" id="heroAction">Create Account</button>
             </div>
         </div>
     </header>
@@ -60,15 +76,37 @@
                 </article>
                 <article class="feature-card">
                     <h3>Global Rate Insights</h3>
-                    <p>Explore tax rates around the world to compare regulations and make better financial decisions.</p>
+                    <p>Explore tax rates around the world to compare regulations and make smarter financial choices.</p>
                 </article>
                 <article class="feature-card">
                     <h3>24/7 AI Assistance</h3>
-                    <p>Ask questions anytime and get helpful guidance from an online AI tax assistant.</p>
+                    <p>Ask questions anytime and get helpful guidance from an online tax assistant.</p>
                 </article>
                 <article class="feature-card">
                     <h3>Secure Identity Verification</h3>
                     <p>Access your account securely and verify personal details with valid proof of identification.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="dashboard" class="section">
+            <div class="section-heading">
+                <p class="eyebrow">Inside the experience</p>
+                <h2>More useful tools for every tax season</h2>
+            </div>
+
+            <div class="dashboard-grid">
+                <article class="dash-card">
+                    <h3>Smart checklist</h3>
+                    <p>Stay on top of filing deadlines, pending documents, and tax reminders with a clear to-do plan.</p>
+                </article>
+                <article class="dash-card">
+                    <h3>Document vault</h3>
+                    <p>Store and review personal tax documents, proof of identification, and important receipts in one place.</p>
+                </article>
+                <article class="dash-card">
+                    <h3>Live support</h3>
+                    <p>Reach a human support agent or an AI helper in seconds whenever you need guidance.</p>
                 </article>
             </div>
         </section>
@@ -78,9 +116,9 @@
                 <div>
                     <p class="eyebrow">Support that feels personal</p>
                     <h2>Contact support whenever you need help</h2>
-                    <p>Whether you need help with a filing question or account access, TaxHub makes it easy to reach the right team quickly.</p>
+                    <p>Whether you need help with a filing question or account access, TaxHub makes it easy to get help quickly.</p>
                 </div>
-                <a href="#signup" class="btn btn-primary">Contact Support</a>
+                <a href="mailto:support@taxhub.example" class="btn btn-primary">Contact Support</a>
             </div>
         </section>
 
@@ -88,8 +126,8 @@
             <h2>Join TaxHub today</h2>
             <p>Create an account, sign in securely, and start managing your tax information with confidence.</p>
             <div class="hero-buttons">
-                <a href="#" class="btn btn-primary">Create Account</a>
-                <a href="#" class="btn btn-outline">Log In</a>
+                <button class="btn btn-primary" id="ctaSignup">Create Account</button>
+                <button class="btn btn-outline" id="ctaLogin">Log In</button>
             </div>
         </section>
     </main>
@@ -97,6 +135,40 @@
     <footer>
         <p>© <span id="year"></span> TaxHub. Trusted help for modern tax needs.</p>
     </footer>
+
+    <div class="modal hidden" id="authModal">
+        <div class="modal-card">
+            <button class="modal-close" id="closeModal" aria-label="Close">×</button>
+            <div class="modal-tabs">
+                <button class="tab-btn active" data-mode="login">Log In</button>
+                <button class="tab-btn" data-mode="signup">Sign Up</button>
+            </div>
+
+            <form id="loginForm" class="auth-form active-form">
+                <h3>Welcome back</h3>
+                <label>Email</label>
+                <input type="email" id="loginEmail" required>
+                <label>Password</label>
+                <input type="password" id="loginPassword" required>
+                <button type="submit" class="btn btn-primary full">Log In</button>
+                <p class="form-message" id="loginMessage"></p>
+            </form>
+
+            <form id="signupForm" class="auth-form">
+                <h3>Create your account</h3>
+                <label>Full name</label>
+                <input type="text" id="signupName" required>
+                <label>Email</label>
+                <input type="email" id="signupEmail" required>
+                <label>Password</label>
+                <input type="password" id="signupPassword" required>
+                <label>Confirm password</label>
+                <input type="password" id="signupConfirm" required>
+                <button type="submit" class="btn btn-primary full">Sign Up</button>
+                <p class="form-message" id="signupMessage"></p>
+            </form>
+        </div>
+    </div>
 
     <script src="sketch.js"></script>
 </body>
