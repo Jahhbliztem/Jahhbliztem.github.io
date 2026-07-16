@@ -3,53 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tax Calculator</title>
+    <meta name="description" content="TaxHub helps you manage taxes, explore global tax rates, connect with 24/7 AI support, and verify your identity securely.">
+    <title>TaxHub | Smart Tax Assistance</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="hero">
+        <nav class="navbar">
+            <a href="#" class="brand">TaxHub</a>
+            <div class="nav-actions">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#support" class="nav-link">Support</a>
+                <a href="#signup" class="btn btn-dark">Log In</a>
+                <a href="#signup" class="btn btn-light">Sign Up</a>
+            </div>
+        </nav>
 
-<div class="container">
-    <h1>💰 Tax Calculator</h1>
-
-    <div class="card">
-
-        <label>Annual Income ($)</label>
-        <input type="number" id="income" placeholder="50000">
-
-        <label>Tax Rate (%)</label>
-        <input type="number" id="taxRate" placeholder="20">
-
-        <button onclick="calculateTax()">
-            Calculate
-        </button>
-
-        <div class="results">
-
-            <div class="result-box">
-                <span>Annual Tax</span>
-                <h2 id="annualTax">$0</h2>
+        <div class="hero-content">
+            <div class="hero-text">
+                <p class="eyebrow">Secure • Smart • Simple</p>
+                <h1>Your tax journey, made clear.</h1>
+                <p class="hero-description">
+                    TaxHub is a modern tax companion that helps you view your tax information, understand tax rates around the world, connect with a 24/7 AI agent, and get human support when you need it.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#signup" class="btn btn-primary">Start Free</a>
+                    <a href="#features" class="btn btn-outline">Explore Features</a>
+                </div>
             </div>
 
-            <div class="result-box">
-                <span>Monthly Tax</span>
-                <h2 id="monthlyTax">$0</h2>
-            </div>
+            <div class="hero-card">
+                <h3>Quick tax estimate</h3>
+                <label for="income">Annual income ($)</label>
+                <input type="number" id="income" placeholder="50000">
 
-            <div class="result-box">
-                <span>Net Annual Income</span>
-                <h2 id="netAnnual">$0</h2>
-            </div>
+                <label for="taxRate">Estimated tax rate (%)</label>
+                <input type="number" id="taxRate" placeholder="20">
 
-            <div class="result-box">
-                <span>Net Monthly Income</span>
-                <h2 id="netMonthly">$0</h2>
+                <button type="button" id="estimateButton">Estimate</button>
+                <p id="estimateResult" class="estimate-result">Your estimated tax will appear here.</p>
             </div>
-
         </div>
+    </header>
 
-    </div>
-</div>
+    <main>
+        <section id="features" class="section">
+            <div class="section-heading">
+                <p class="eyebrow">Core features</p>
+                <h2>Everything you need to stay informed and supported</h2>
+            </div>
 
-<script src="script.js"></script>
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <h3>Tax Overview</h3>
+                    <p>View your tax records clearly, understand obligations, and track your status in real time.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>Global Rate Insights</h3>
+                    <p>Explore tax rates around the world to compare regulations and make better financial decisions.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>24/7 AI Assistance</h3>
+                    <p>Ask questions anytime and get helpful guidance from an online AI tax assistant.</p>
+                </article>
+                <article class="feature-card">
+                    <h3>Secure Identity Verification</h3>
+                    <p>Access your account securely and verify personal details with valid proof of identification.</p>
+                </article>
+            </div>
+        </section>
+
+        <section id="support" class="section support-section">
+            <div class="support-card">
+                <div>
+                    <p class="eyebrow">Support that feels personal</p>
+                    <h2>Contact support whenever you need help</h2>
+                    <p>Whether you need help with a filing question or account access, TaxHub makes it easy to reach the right team quickly.</p>
+                </div>
+                <a href="#signup" class="btn btn-primary">Contact Support</a>
+            </div>
+        </section>
+
+        <section id="signup" class="section cta-section">
+            <h2>Join TaxHub today</h2>
+            <p>Create an account, sign in securely, and start managing your tax information with confidence.</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn btn-primary">Create Account</a>
+                <a href="#" class="btn btn-outline">Log In</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>© <span id="year"></span> TaxHub. Trusted help for modern tax needs.</p>
+    </footer>
+
+    <script src="sketch.js"></script>
 </body>
 </html>
