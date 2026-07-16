@@ -36,6 +36,99 @@ function clearActiveUser(){
     localStorage.removeItem(ACTIVE_USER_KEY);
 }
 
+const ACTION_TASKS_KEY = "taxhubActionTasks";
+const MEMBERSHIP_PLAN_KEY = "taxhubMembershipPlan";
+
+function getActionTasks(){
+    try {
+        return JSON.parse(localStorage.getItem(ACTION_TASKS_KEY)) || [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function saveActionTasks(tasks){
+    localStorage.setItem(ACTION_TASKS_KEY, JSON.stringify(tasks));
+}
+
+function renderActionTasks(){
+    const list = document.getElementById("actionList");
+    if (!list) return;
+
+    const tasks = getActionTasks();
+    list.innerHTML = "";
+
+    if (!tasks.length) {
+        list.innerHTML = '<li>Welcome task: Explore your tax overview</li>';
+        return;
+    }
+
+    tasks.slice(-4).reverse().forEach((task) => {
+        const item = document.createElement("li");
+        item.textContent = task;
+        list.appendChild(item);
+    });
+}
+
+function updateActionStatus(message){
+    const status = document.getElementById("actionStatus");
+    if (status) {
+        status.textContent = message;
+    }
+}
+
+function addActionTask(taskText){
+    const tasks = getActionTasks();
+    tasks.push(taskText);
+    saveActionTasks(tasks);
+    renderActionTasks();
+}
+
+function setMembershipPlan(planName, amount, description){
+    const summaryTitle = document.getElementById("planSummaryTitle");
+    const summaryText = document.getElementById("planSummaryText");
+    const payButton = document.getElementById("payPlanButton");
+
+    if (summaryTitle) summaryTitle.textContent = `${planName} plan selected`;
+    if (summaryText) summaryText.textContent = description;
+    if (payButton) payButton.textContent = `Pay ${planName}`;
+
+    localStorage.setItem(MEMBERSHIP_PLAN_KEY, planName);
+}
+
+function showPlan(plan){
+    document.querySelectorAll(".plan-tab").forEach((tab) => {
+        tab.classList.toggle("active", tab.dataset.plan === plan);
+    });
+
+    document.querySelectorAll(".plan-card").forEach((card) => {
+        card.classList.toggle("active", card.id === `plan-${plan}`);
+    });
+
+    const details = {
+        starter: {
+            name: "Starter",
+            amount: "$9/mo",
+            description: "Great for getting started with guided answers and simple filing help."
+        },
+        growth: {
+            name: "Growth",
+            amount: "$24/mo",
+            description: "Perfect for ongoing support, planning, and more frequent tutoring."
+        },
+        premium: {
+            name: "Premium",
+            amount: "$49/mo",
+            description: "Best for dedicated mentoring, premium guidance, and custom planning."
+        }
+    };
+
+    const selected = details[plan];
+    if (selected) {
+        setMembershipPlan(`${selected.name}`, selected.amount, selected.description);
+    }
+}
+
 function openModal(mode){
     const modal = document.getElementById("authModal");
     const loginForm = document.getElementById("loginForm");
@@ -171,6 +264,14 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const activeUser = getActiveUser();
     updateAuthState(activeUser);
+    renderActionTasks();
+
+    const savedPlan = localStorage.getItem(MEMBERSHIP_PLAN_KEY);
+    if (savedPlan) {
+        showPlan(savedPlan.toLowerCase());
+    } else {
+        showPlan("starter");
+    }
 
     document.getElementById("heroSignup").addEventListener("click", () => openModal("signup"));
     document.getElementById("heroLogin").addEventListener("click", () => openModal("login"));
@@ -192,4 +293,52 @@ window.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("signupForm").addEventListener("submit", handleSignup);
     document.getElementById("loginForm").addEventListener("submit", handleLogin);
+
+    document.querySelectorAll(".action-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+            const action = button.dataset.action;
+            const user = getActiveUser();
+
+            if (action === "checklist") {
+                addActionTask("Added filing checklist to your workspace");
+                updateActionStatus(user ? "Checklist saved to your workspace." : "Checklist ready. Sign in to save it permanently.");
+            } else if (action === "review") {
+                addActionTask("Started a document review step");
+                updateActionStatus(user ? "Review step added to your plan." : "Review step queued. Sign in to keep it saved.");
+            } else if (action === "support") {
+                addActionTask("Booked a support follow-up");
+                updateActionStatus(user ? "Support request added." : "Support request queued. Sign in to keep it saved.");
+            } else if (action === "plan") {
+                document.getElementById("pricing").scrollIntoView({ behavior: "smooth" });
+                updateActionStatus("Membership options opened below.");
+            } else if (action === "guide") {
+                addActionTask("Downloaded the starter tax guide");
+                updateActionStatus("Starter guide prepared for download.");
+            }
+        });
+    });
+
+    document.querySelectorAll(".plan-tab").forEach((button) => {
+        button.addEventListener("click", () => showPlan(button.dataset.plan));
+    });
+
+    document.querySelectorAll(".plan-select-btn").forEach((button) => {
+        button.addEventListener("click", () => {
+            const planName = button.dataset.planName.toLowerCase();
+            showPlan(planName);
+            updateActionStatus(`${button.dataset.planName} plan selected. Choose pay to continue.`);
+        });
+    });
+
+    document.getElementById("payPlanButton").addEventListener("click", () => {
+        const user = getActiveUser();
+        if (!user) {
+            updateActionStatus("Create an account to secure your membership choice.");
+            openModal("signup");
+            return;
+        }
+
+        const selected = localStorage.getItem(MEMBERSHIP_PLAN_KEY) || "Starter";
+        updateActionStatus(`${selected} membership is ready for checkout.`);
+    });
 });
