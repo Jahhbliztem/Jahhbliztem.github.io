@@ -188,6 +188,7 @@ function openCheckoutModal(){
 
     if (modal) {
         modal.classList.remove("hidden");
+        modal.setAttribute("aria-hidden", "false");
     }
 }
 
@@ -195,6 +196,7 @@ function closeCheckoutModal(){
     const modal = document.getElementById("checkoutModal");
     if (modal) {
         modal.classList.add("hidden");
+        modal.setAttribute("aria-hidden", "true");
     }
 }
 
@@ -416,14 +418,14 @@ window.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("payPlanButton").addEventListener("click", () => {
         const user = getActiveUser();
+        const selected = localStorage.getItem(MEMBERSHIP_PLAN_KEY) || "Starter";
+
         if (!user) {
-            updateActionStatus("Create an account to secure your membership choice.");
-            openModal("signup");
-            return;
+            updateActionStatus(`Demo checkout ready for ${selected}. Sign in optional.`);
+        } else {
+            updateActionStatus(`${selected} membership is ready for checkout.`);
         }
 
-        const selected = localStorage.getItem(MEMBERSHIP_PLAN_KEY) || "Starter";
-        updateActionStatus(`${selected} membership is ready for checkout.`);
         openCheckoutModal();
     });
 
